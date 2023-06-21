@@ -27,6 +27,7 @@ const hanleSubmission = () => {
    await updateProfile(user, {
       displayName:value.name,
     })
+    navigate('/');
     onSignUp();
  
 
