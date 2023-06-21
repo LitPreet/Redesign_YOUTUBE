@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { Context } from '../context/contextApi';
 
+
 const LeftPanel = () => {
     const {
         selectedCategory,
@@ -14,6 +15,8 @@ const LeftPanel = () => {
         setOpen,
       } = useContext(Context);
       const navigate = useNavigate();
+
+     
     
       const ClickItemHandler = (name,type) => {
         switch (type) {
@@ -53,6 +56,7 @@ const LeftPanel = () => {
               ClickItemHandler(item.name, item.type);
               {item.type === 'menu' ? navigate('/liked-videos') :   navigate("/")}
               if(item.type === 'subs') navigate('/subscribe-channel');
+            
             
             }}
             className={`${

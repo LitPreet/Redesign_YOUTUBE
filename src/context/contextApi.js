@@ -10,6 +10,8 @@ export const AppContext = (props) => {
   const [open, setOpen] = useState(false);
   const [likedVideo, setLikedVideo] = useState([]);
   const [SubscribeChannel, setSubscribeChannel] = useState([]);
+  const [account, setAccount] = useState(true);
+
 
   const addLikedVideo = (video) => {
     setLikedVideo((prevLikedVideo) => [...prevLikedVideo, video]);
@@ -67,6 +69,8 @@ export const AppContext = (props) => {
         setSubscribeChannel,
         addSubscribe,
         UnSubscribe,
+        account, setAccount
+        
       }}
     >
       {props.children}

@@ -4,19 +4,19 @@ import { Link ,useNavigate, useLocation } from "react-router-dom";
 import PCLogo from "../images/yt-logo.png";
 import MBLogo from "../images/yt-logo-mobile.png";
 //icons
-import { SlMenu } from "react-icons/sl";
 import { IoIosSearch } from "react-icons/io";
-import { FiLogIn } from "react-icons/fi";
+import {BiLogOutCircle} from 'react-icons/bi'
 import { FiBell } from "react-icons/fi";
-import { CgClose } from "react-icons/cg";
-import Loader from "../Loader/Loader";
 import { Context } from "../context/contextApi";
+import { signOut } from "firebase/auth";
+import { auth } from '../firebase';
 
 
-const Header = () => {
+const Header = ( {onSignOut} ) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const { mobileMenu, setMobileMenu } = useContext(Context);
+  const { mobileMenu, setMobileMenu} = useContext(Context);
   const navigate = useNavigate();
+  
 
   const searchQueryHandler = (event) =>{
 
@@ -27,6 +27,19 @@ navigate(`/searchResult/${searchQuery}`);
 
 const MobileMenuToggle = () =>{
   setMobileMenu(!mobileMenu);
+}
+
+const handleSignOut = () => {
+ 
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      navigate("/login");
+      onSignOut();
+    
+      }).catch((error) => {
+      // An error happened.
+      });
+  
 }
   
   const { pathname } = useLocation();
@@ -40,11 +53,11 @@ const MobileMenuToggle = () =>{
       <div className="flex h-5 items-center ">
         {pageName !== "video" && (
           <div className=" h-10 w-10 hidden md:hidden items-center  cursor-pointer hover:bg-[#51545b]/[0.7] rounded-full justify-center" onClick={MobileMenuToggle}>
-            {mobileMenu ? (
+            {/* {mobileMenu ? (
               <CgClose className="text-white text-xl" />
             ) : (
               <SlMenu className="text-white text-xl" />
-            )}
+            )} */}
           </div>
         )}
 
@@ -77,18 +90,14 @@ const MobileMenuToggle = () =>{
 
 
       <div className="flex items-center">
-        <div className="hidden md:flex justify-between items-center">
-          <button className="flex rounded-md items-center justify-center h-8 w-[80px] bg-white text-black font-semibold">Signup</button>
-          <button className="flex rounded-md ml-[8px] items-center justify-center h-8 w-[80px] bg-red-600 text-white
-          "  >
-            {/* <FiLogIn className="text-white text-xl cursor-pointer"  /> */}
-            Login
+        <div className="hidden sm:flex md:flex justify-between items-center">
+          <button onClick={handleSignOut} className="flex rounded-md items-center justify-center h-8 w-[80px] bg-white text-black font-semibold">SignOut</button>
           
-          </button>
           <div className="flex items-center justify-center ml-2 h-10 w-10 rounded-full hover:bg-[#51545b]/[0.7]">
             <FiBell className="text-white text-xl cursor-pointer" />
           </div>
         </div>
+        <button onClick={handleSignOut} className="flex sm:hidden md:hidden items-center justify-center mr-2  h-[27px] w-[27px] rounded-full bg-white "><BiLogOutCircle /></button>
        
         <div
           className="flex h-8 w-8 overflow-hidden rounded-full md:ml-4 

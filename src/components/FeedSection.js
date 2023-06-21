@@ -1,37 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
-import LeftPanelItem from "./LeftPanelItem";
 import { Context } from "../context/contextApi";
 import VideoCard from "./VideoCard";
-import { BsArrowLeftShort } from "react-icons/bs";
-import { categories } from "../utils/constants";
 import { useNavigate } from "react-router-dom";
 import Loader from '../Loader/Loader'
 import LeftPanel from "./LeftPanel";
 
 const FeedSection = () => {
   const {
-    selectedCategory,
-    setSelectedCategory,
-    mobileMenu,
+    
     searchResults,
     loading,
-    open,
-    setOpen,
+    
   } = useContext(Context);
   const navigate = useNavigate();
 
-  const ClickItemHandler = (type, name) => {
-    switch (type) {
-      case "category":
-        return setSelectedCategory(name);
-      case "home":
-        return setSelectedCategory(name);
-      case "menu":
-        return false;
-      default:
-        break;
-    }
-  };
+ 
 
   useEffect(() => {
     document.getElementById('root').classList.remove('custom-h');
@@ -39,7 +22,7 @@ const FeedSection = () => {
 
   return (
     <div className="flex w-full overflow-y-auto ">
-      <LeftPanel />
+      <LeftPanel  />
    
     
  {loading && <Loader />}
