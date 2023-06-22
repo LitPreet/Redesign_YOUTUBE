@@ -1,12 +1,10 @@
 import React from "react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import { abbreviateNumber } from "js-abbreviation-number";
 import VideoLength from "../shared/VideoLength";
 import { Context } from "../context/contextApi";
 import LeftPanel from "./LeftPanel";
-import Loader from "../Loader/Loader";
 import Like from "../images/like.png";
 import { IoMdRemoveCircle } from "react-icons/io";
 
@@ -26,11 +24,13 @@ const LikedVideoList = () => {
       <LeftPanel />
       {!likedVideo || likedVideo.length === 0 ? (
         <>
+        <div className="h-[90vh] md:h-[85vh] bg-black w-full overflow-y-hidden">
           <div className=" mt-[50px] md:mt-[40px] md:w-full w-full md:flex flex md:flex-col flex-col md:justify-center md:items-center  justify-center items-center overflow-y-hidden md:overflow-y-hidden">
-            <h1 className="text-center text-2xl font-semibold">
+            <h1 className="text-center text-white text-2xl font-semibold">
               No liked videos yet
             </h1>
-            <img src={Like} className="md:w-[350px] w-[270px]" />
+            <img src={Like} alt="d" className="md:w-[350px] w-[270px]" />
+          </div>
           </div>
         </>
       ) : (
@@ -40,11 +40,11 @@ const LikedVideoList = () => {
               <div className='flex flex-col items-center '>
               <div
                 onClick={() => handleDivClick(video?.id)}
-                className="flex flex-col mb-8 mx-3 bg-[#fff0e5] cursor-pointer rounded-lg border-[2px] border-black "
+                className="flex flex-col mb-8 mx-3 bg-[#222222] cursor-pointer rounded-lg border-[2px] border-black "
               >
                 <div className="relative h-40 md:first-line:h-40  overflow-hidden">
                   <img
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover" alt="img"
                     src={video?.thumbnails?.[0]?.url}
                   />
 
@@ -54,30 +54,30 @@ const LikedVideoList = () => {
                 </div>
                 <div className="flex text-black mt-3 ml-2">
                   <div className="flex items-start">
-                    <div className="flex h-9 w-9 rounded-full overflow-hidden">
+                    <div className="flex h-9 w-9 rounded-full border border-white overflow-hidden">
                       <img
-                        className="h-full w-full object-cover"
+                        className="h-full w-full object-cover "
                         src={video?.author?.avatar[0]?.url}
                         alt="img"
                       />
                     </div>
                   </div>
                   <div className="flex flex-col ml-3 overflow-hidden">
-                    <span className="text-sm font-bold line-clamp-2">
-                      {/* const truncatedTitle = video?.title?.length > 33 ? `${video?.title?.slice(0, 13)}...` : video?.title; */}
+                    <span className="text-sm font-bold line-clamp-2 text-white">
+      
                       {video?.title}
                     </span>
-                    <span className="text-[12px] font-semibold mt-2 text-black/[0.7] flex items-center">
+                    <span className="text-[12px] font-semibold mt-2 text-white/[0.8] flex items-center">
                       {!video?.author?.title && "Zinc"}
                       {video?.author?.title}
 
                       {video?.author?.badges[0]?.type ===
                         "VERIFIED_CHANNEL" && (
-                        <BsFillCheckCircleFill className="text-black/[0.5] text-[12px] ml-1" />
+                        <BsFillCheckCircleFill className="text-white/[0.5] text-[12px] ml-1" />
                       )}
                     </span>
 
-                    <div className="flex text-[12px] font-semibold text-black/[0.7] truncate overflow-hidden">
+                    <div className="flex text-[12px] font-semibold text-white/[0.7] truncate overflow-hidden">
                       <span>
                         {`${abbreviateNumber(video?.stats?.views, 2)}`} views
                       </span>

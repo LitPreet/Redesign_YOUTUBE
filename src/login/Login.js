@@ -1,46 +1,56 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import Youtube from '../images/yt-logo.png';
-import {  signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth } from '../firebase';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Youtube from "../images/yt-logo.png";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInAnonymously } from "firebase/auth";
 
-const Login = ({onSignUp}) => {
+const Login = ({ onSignUp }) => {
   const [value, setValue] = useState({
-    email:"",
-    pass:"",
+    email: "",
+    pass: "",
   });
-  const[errorMsg,setErrorMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
   const [submitButtonDisable, setSubmitButtonDisable] = useState(false);
   const navigate = useNavigate();
+  const auth = getAuth();
+
+  const handleGuestLogin = () => {
+    setSubmitButtonDisable(true);
+    signInAnonymously(auth)
+      .then((res) => {
+        setSubmitButtonDisable(false);
+        // Signed in..
+        navigate("/");
+        onSignUp();
+      })
+      .catch((error) => {
+        setSubmitButtonDisable(false);
+      });
+  };
+
   const handleSubmission = () => {
-    if( !value.email || !value.pass)  {
+    if (!value.email || !value.pass) {
       setErrorMsg("Fill all the fields");
       return;
     }
     setErrorMsg("");
     setSubmitButtonDisable(true);
-    signInWithEmailAndPassword(auth,value.email,value.pass).then(async (res) => {
-      
-      setSubmitButtonDisable(false);
-      navigate('/');
-      onSignUp();
-   
-  
-    })
-    .catch((err) => {
-      setSubmitButtonDisable(false);
-      setErrorMsg(err.message);
-    })
-  }
-  
- 
-  return  (
+    signInWithEmailAndPassword(auth, value.email, value.pass)
+      .then(async (res) => {
+        setSubmitButtonDisable(false);
+        navigate("/");
+        onSignUp();
+      })
+      .catch((err) => {
+        setSubmitButtonDisable(false);
+        setErrorMsg(err.message);
+      });
+  };
+
+  return (
     <section className="bg-gray-50 dark:bg-gray-900 h-full overflow-hidden">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <Link
-          
-          className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
-        >
+        <Link className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
           <img className="w-24  mr-2" src={Youtube} alt="logo" />
         </Link>
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -63,7 +73,9 @@ const Login = ({onSignUp}) => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@email.com"
                   required=""
-                  onChange={(e) => setValue((prev) => ({...prev, email: e.target.value}))}
+                  onChange={(e) =>
+                    setValue((prev) => ({ ...prev, email: e.target.value }))
+                  }
                 />
               </div>
               <div>
@@ -80,22 +92,21 @@ const Login = ({onSignUp}) => {
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required=""
-                  onChange={(e) => setValue((prev) => ({...prev, pass: e.target.value}))}
+                  onChange={(e) =>
+                    setValue((prev) => ({ ...prev, pass: e.target.value }))
+                  }
                 />
               </div>
               <div className="flex items-center justify-between">
-              <div className="flex items-start">
-                
-                <div className="ml-0 text-sm ">
-                 {errorMsg && ( <p
-                    
-                    className="flex item-center justify-center font-semibold bg-white px-3 py-2 rounded-md dark:text-red-600"
-                  >
-                    {errorMsg}
-                  </p>)}
+                <div className="flex items-start">
+                  <div className="ml-0 text-sm ">
+                    {errorMsg && (
+                      <p className="flex item-center justify-center font-semibold bg-white px-3 py-2 rounded-md dark:text-red-600">
+                        {errorMsg}
+                      </p>
+                    )}
+                  </div>
                 </div>
-              </div>
-               
               </div>
               <button
                 type="submit"
@@ -105,11 +116,18 @@ const Login = ({onSignUp}) => {
               >
                 Sign in
               </button>
+              <button
+                type="submit"
+                onClick={handleGuestLogin}
+                disabled={submitButtonDisable}
+                className="w-full bg-blue-600 text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:opacity-75"
+              >
+                Try as guest
+              </button>
               <p className="text-sm font-light text-gray-300 dark:text-gray-300">
                 Don’t have an account yet?{" "}
                 <Link
                   to="/signup"
-                  
                   className="font-medium text-primary-600 hover:underline dark:text-white"
                 >
                   Sign up
@@ -120,7 +138,7 @@ const Login = ({onSignUp}) => {
         </div>
       </div>
     </section>
-  ) 
+  );
 };
 
 export default Login;

@@ -3,7 +3,7 @@ import {Context} from '../context/contextApi';
 import { useEffect } from 'react';
 
 const LeftPanelItem = ({text, icon, action, className}) => {
-  const {open,setOpen} = useContext(Context);
+  const {open} = useContext(Context);
   const [isClicked, setIsClicked] = useState(false);
   
   useEffect(() => {
