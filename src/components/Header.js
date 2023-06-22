@@ -47,7 +47,7 @@ const handleSignOut = () => {
 
   return (
     
-    <div className="sticky  text-center my-[16px] mx-4 rounded-2xl  z-20 flex shadow-2xl h-[3rem] md:h-[4rem] flex-none  bg-[#222222] justify-between items-center px-4 md:px-5 transition-all ">
+    <div className="sticky  text-center my-[16px] mx-2 md:mx-4 rounded-2xl  z-20 flex shadow-2xl h-[55px] md:h-[4rem] flex-none  bg-[#222222] justify-between items-center px-4 md:px-5 transition-all ">
       {/* hamburger  and logo */}
 
       <div className="flex h-5 items-center ">

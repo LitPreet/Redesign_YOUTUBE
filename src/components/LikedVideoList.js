@@ -26,10 +26,10 @@ const LikedVideoList = () => {
         <>
         <div className="h-[90vh] md:h-[85vh] bg-black w-full overflow-y-hidden">
           <div className=" mt-[50px] md:mt-[40px] md:w-full w-full md:flex flex md:flex-col flex-col md:justify-center md:items-center  justify-center items-center overflow-y-hidden md:overflow-y-hidden">
-            <h1 className="text-center text-white text-2xl font-semibold">
+            <h1 className="text-center text-white text-sm md:text-2xl font-semibold">
               No liked videos yet
             </h1>
-            <img src={Like} alt="d" className="md:w-[350px] w-[270px]" />
+            <img src={Like} alt="d" className="md:w-[350px] w-[200px]" />
           </div>
           </div>
         </>
