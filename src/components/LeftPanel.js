@@ -35,7 +35,7 @@ const LeftPanel = () => {
     
   return (
     <div
-    className={`bg-[#222222] z-10 rounded-s-none rounded-xl h-[500px] md:translate-x-0  pt-8  ${
+    className={`bg-[#222222] z-10 rounded-s-none  rounded-xl  h-[500px] md:h-[500px] md:translate-x-0  pt-8  ${
       open ? "w-60" : "w-12" 
     } duration-300 fixed`}
   >

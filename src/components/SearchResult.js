@@ -26,7 +26,7 @@ const fetchSearchResult = () =>{
 }
 
   return (
-    <div className='flex flex-row h-[calc(100%-56px)]'>
+    <div className='flex flex-row h-[calc(100%-56px)] bg-black'>
     <LeftPanel />
     <div className='grow w-[calc(100%-240px)] h-full overflow-y-auto bg-black ml-[48px]'>
       <div className='grid grid-cols-1 gap-2 p-5'>
