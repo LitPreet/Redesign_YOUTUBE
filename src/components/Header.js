@@ -97,10 +97,10 @@ const handleSignOut = () => {
             <FiBell className="text-white text-xl cursor-pointer" />
           </div>
         </div>
-        <button onClick={handleSignOut} className="flex sm:hidden md:hidden items-center justify-center mr-2  h-[27px] w-[27px] rounded-full bg-white "><BiLogOutCircle /></button>
+        <button onClick={handleSignOut} className="flex sm:hidden md:hidden items-center justify-center mr-2  h-[32px] w-[32px] rounded-full bg-white "><BiLogOutCircle /></button>
        
         <div
-          className="flex h-8 w-8 overflow-hidden rounded-full md:ml-4 
+          className="hidden md:flex h-8 w-8 overflow-hidden rounded-full md:ml-4 
           "
         >
           <img

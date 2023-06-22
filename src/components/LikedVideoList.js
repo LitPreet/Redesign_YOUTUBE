@@ -24,7 +24,7 @@ const LikedVideoList = () => {
       <LeftPanel />
       {!likedVideo || likedVideo.length === 0 ? (
         <>
-        <div className="h-[90vh] md:h-[85vh] bg-black flex justify-center items-center w-full overflow-y-hidden">
+        <div className="h-[90vh] md:h-[85vh] bg-black flex justify-center items-center md:items-center w-full overflow-y-hidden">
           <div className=" mt-[50px] md:mt-[40px] md:w-full w-full md:flex flex md:flex-col flex-col md:justify-center md:items-center  justify-center items-center overflow-y-hidden md:overflow-y-hidden">
             <h1 className="text-center text-white text-sm md:text-2xl font-semibold">
               No liked videos yet
