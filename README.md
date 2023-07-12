@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+<img width="960" alt="img4" src="https://github.com/LitPreet/Redesign_YOUTUBE/assets/77205201/4d61922c-1362-4554-8035-049b42af1514">
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
